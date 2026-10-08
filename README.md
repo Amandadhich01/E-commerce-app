@@ -1,111 +1,76 @@
-# ⚡ NexaStore — Modern Full-Featured E-Commerce Web App
+# E-Commerce App
 
-[![Live Website](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-brightgreen?style=for-the-badge&logo=github)](https://amandadhich01.github.io/E-commerce-app/)
-[![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
-[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
-[![Express](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
+A full-stack e-commerce web application with a responsive product catalog, cart, wishlist, and simulated checkout flow. The frontend is hosted live on GitHub Pages, and the project includes a Node.js/Express backend API.
 
-A high-performance, modern, responsive e-commerce web application featuring a rich product catalog, real-time search, dynamic category filtering, interactive shopping cart with coupon discounts, wishlist drawer, seamless checkout simulation, and persistent state management.
-
-🌐 **Live Website Link:**  
-👉 **[https://amandadhich01.github.io/E-commerce-app/](https://amandadhich01.github.io/E-commerce-app/)**
+### Live Demo
+View the live website:  
+**https://amandadhich01.github.io/E-commerce-app/**
 
 ---
 
-## 🌟 Key Features
+## Features
 
-### 🛍️ Client-Side E-Commerce Experience
-- **Interactive Product Catalog**: Showcasing electronics, audio equipment, smartphones, cameras, wearables, and apparel with high-resolution imagery and fallback safeguards.
-- **Instant Search & Filter Bar**: Real-time keyword search, category pills, price and rating sorting without page reload.
-- **Product Quick View Modal**: Inspect high-res product photos, specifications, key highlights, and in-stock counts.
-- **Slide-Over Shopping Cart Drawer**:
-  - Live quantity modification (+ / - / remove)
-  - Promo code verification (`WELCOME10` for 10% off, `SAVE20` for 20% off, `FREESHIP` for free shipping)
-  - Automatic calculation of subtotal, discounts, shipping, taxes, and grand total.
-- **Wishlist Drawer**: Save favorite products with instant "Move to Cart" actions.
-- **Multi-Step Checkout Flow**:
-  - Shipping address and customer info input
-  - Multiple payment methods (Card, UPI / QR, Cash on Delivery)
-  - Animated Order Confirmation receipt with generated Order ID and delivery tracking.
-- **Authentication & User Profile**:
-  - Mock login & registration with persistent `localStorage` session
-  - Order history log tracking all completed purchases
-  - Pre-filled demo credentials for one-click testing.
-- **Modern UI & Themes**:
-  - Responsive design optimized for mobile, tablet, and desktop
-  - Dark & Light mode toggle with user preference persistence
-  - Floating toast notifications for real-time user feedback.
+### Frontend (Web Store)
+- **Product Catalog:** Electronics, audio gear, smartphones, cameras, and accessories with high-resolution imagery and fallback placeholders.
+- **Search & Filters:** Real-time search query matching, category tabs, and sorting by price and ratings.
+- **Product Quick View:** Modal preview with full product specifications, highlights, and stock counts.
+- **Shopping Cart Drawer:** Slide-over cart with live quantity controls, subtotal, estimated tax and shipping, and coupon code support (`WELCOME10`, `SAVE20`).
+- **Wishlist:** Save favorite items to a wishlist drawer with one-click transfer to cart.
+- **Checkout Flow:** Simulated multi-step checkout with address form, payment options (Card, UPI, Cash on Delivery), and order confirmation receipts.
+- **User Accounts:** Local session login and registration with order history tracking.
+- **Theme Switcher:** Toggle between dark and light themes.
+
+### Backend (REST API)
+- Express.js server with MongoDB/Mongoose connection.
+- User authentication routes with JWT and bcrypt.
+- Product CRUD routes (`/api/products`).
+- CORS configured for cross-origin client access.
 
 ---
 
-## 📁 Repository Structure
+## Project Structure
 
 ```
 E-commerce-app/
-├── index.html                   # Main production frontend (Served by GitHub Pages)
+├── index.html         # Main storefront frontend (deployed via GitHub Pages)
 ├── css/
-│   └── style.css                # Modern responsive UI styling & theme variables
+│   └── style.css      # Responsive styles and theme variables
 ├── js/
-│   ├── products.js              # Curated product catalog dataset & SVG fallbacks
-│   └── app.js                   # State management, cart, wishlist, checkout & auth
-├── backend/                     # Node.js + Express REST API
-│   ├── package.json             # Backend dependencies (Express, Mongoose, JWT, etc.)
-│   ├── .env.example             # Environment variables template
-│   └── src/
-│       ├── server.js            # Express server entry point
-│       ├── config/database.js   # MongoDB connection setup
-│       ├── controllers/         # Auth & Product controllers
-│       ├── models/              # User & Product schemas
-│       ├── middleware/          # JWT authentication middleware
-│       └── routes/              # Express API route endpoints
-├── .github/
-│   └── workflows/
-│       └── deploy.yml           # Automated GitHub Pages CI/CD workflow
-├── .gitattributes               # GitHub Linguist language statistics override
-└── README.md                    # Project documentation
+│   ├── products.js    # Product dataset
+│   └── app.js         # Cart, wishlist, checkout, and state management
+├── backend/           # Node.js + Express REST API
+│   ├── package.json   # Dependencies
+│   ├── .env.example   # Environment config
+│   └── src/           # Server, controllers, models, and routes
+└── README.md
 ```
 
 ---
 
-## 🚀 Running the Project
+## How to Run
 
-### 1. View the Live Site
-Simply visit: **[https://amandadhich01.github.io/E-commerce-app/](https://amandadhich01.github.io/E-commerce-app/)**
+### 1. Web Version (Live)
+Visit the live deployment on GitHub Pages:  
+https://amandadhich01.github.io/E-commerce-app/
 
-### 2. Run Locally in Your Browser
-You can open `index.html` directly in any web browser, or serve it using any local static server:
+### 2. Run Frontend Locally
+Open `index.html` directly in your browser, or start a local server:
 ```bash
-# Using Python
 python -m http.server 3000
-
-# Or using Node npx
-npx serve .
 ```
-Navigate to `http://localhost:3000`.
+Then open `http://localhost:3000` in your browser.
 
-### 3. Run the Backend REST API (Optional)
+### 3. Run Backend API (Optional)
 ```bash
 cd backend
 npm install
 npm run dev
 ```
-The Express API will be running on `http://localhost:5000`.
+The server will run on `http://localhost:5000`.
 
 ---
 
-## 🎟️ Demo Promo Codes
-
-Test the discount engine in the cart drawer using these coupon codes:
-- **`WELCOME10`** — 10% Discount on total order
-- **`SAVE20`** — 20% Discount on total order
-- **`FREESHIP`** — Zero shipping cost
-
----
-
-## 👨‍💻 Author
-
+## Author
 **Aman Dadhich**  
 - GitHub: [@Amandadhich01](https://github.com/Amandadhich01)  
 - Email: dadhichaman548@gmail.com
