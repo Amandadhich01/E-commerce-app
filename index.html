@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NexaStore — Premium Next-Gen E-Commerce</title>
+  <meta name="description" content="Experience premium tech, audio, smartphones, cameras, and lifestyle essentials with instant checkout and live preview." />
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%3E<text y=%2226%22 font-size=%2228%22>🛍️</text></svg>">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="announcement-bar">
+    <span class="badge-promo">PROMO</span>
+    <span>Use code <strong>WELCOME10</strong> for 10% off your first order! • Free Shipping over $50</span>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header class="header">
+    <div class="header-container">
+      <!-- Brand Logo -->
+      <a href="#" class="brand-logo" onclick="resetFilters(); return false;">
+        <div class="brand-icon">⚡</div>
+        <span>NexaStore</span>
+        <span class="live-pill">LIVE</span>
+      </a>
+
+      <!-- Search Bar -->
+      <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input 
+          type="text" 
+          id="searchInput" 
+          class="search-input" 
+          placeholder="Search laptops, headphones, cameras, brands..." 
+          autocomplete="off"
+        />
+        <button id="searchClearBtn" class="search-clear-btn" title="Clear search">✕</button>
+      </div>
+
+      <!-- Header Actions -->
+      <div class="header-actions">
+        <!-- Theme Toggle -->
+        <button id="themeToggleBtn" class="btn-icon" title="Toggle Dark/Light Mode">
+          ☀️
+        </button>
+
+        <!-- Wishlist Button -->
+        <button id="wishlistBtn" class="btn-icon" title="View Wishlist">
+          ♥
+          <span id="wishlistBadge" class="badge-count" style="display: none;">0</span>
+        </button>
+
+        <!-- Cart Button -->
+        <button id="cartBtn" class="btn-icon" title="View Shopping Cart">
+          🛒
+          <span id="cartBadge" class="badge-count" style="display: none;">0</span>
+        </button>
+
+        <!-- User Profile / Auth Button -->
+        <button id="userBtn" class="user-btn-text">
+          <span>👤</span>
+          <span id="userBtnText">Sign In</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="hero-tagline">
+        <span>🚀 2026 Tech & Lifestyle Collection</span>
+      </div>
+      <h1 class="hero-title">
+        Upgrade Your Everyday with <br />
+        <span class="gradient-text">Next-Generation Gear</span>
+      </h1>
+      <p class="hero-desc">
+        Discover the most powerful laptops, immersive studio audio, flagship smartphones, and professional cameras — engineered for peak performance.
+      </p>
+      <div class="hero-cta-group">
+        <a href="#catalog" class="btn-primary">
+          Explore Products <span>↓</span>
+        </a>
+        <button class="btn-secondary" onclick="applyCoupon('WELCOME10'); openDrawer('cartDrawer');">
+          Claim 10% Off Coupon
+        </button>
+      </div>
+    </div>
+
+    <!-- Feature Pillars -->
+    <div class="features-banner">
+      <div class="feature-pill">
+        <span class="feature-icon">🚚</span>
+        <div class="feature-info">
+          <h4>Free Express Shipping</h4>
+          <p>On orders above $50</p>
+        </div>
+      </div>
+      <div class="feature-pill">
+        <span class="feature-icon">🔒</span>
+        <div class="feature-info">
+          <h4>100% Secure Checkout</h4>
+          <p>Encrypted 256-bit payments</p>
+        </div>
+      </div>
+      <div class="feature-pill">
+        <span class="feature-icon">⚡</span>
+        <div class="feature-info">
+          <h4>Lightning Fast Dispatch</h4>
+          <p>Dispatched within 24 hours</p>
+        </div>
+      </div>
+      <div class="feature-pill">
+        <span class="feature-icon">🔄</span>
+        <div class="feature-info">
+          <h4>30-Day Money Back</h4>
+          <p>Zero hassle return policy</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Catalog Section -->
+  <main id="catalog" class="catalog-section">
+    <div class="filter-toolbar">
+      <!-- Category Tabs -->
+      <div class="category-tabs">
+        <button class="category-tab active" data-category="all">All Products</button>
+        <button class="category-tab" data-category="electronics">Electronics & PCs</button>
+        <button class="category-tab" data-category="audio">Audio & Headphones</button>
+        <button class="category-tab" data-category="wearables">Smart Watches</button>
+        <button class="category-tab" data-category="cameras">Cameras & Lenses</button>
+        <button class="category-tab" data-category="accessories">Accessories</button>
+        <button class="category-tab" data-category="fashion">Fashion & Footwear</button>
+      </div>
+
+      <!-- Controls Row: Count & Sort -->
+      <div class="controls-row">
+        <div id="resultsCount" class="results-count">Showing 12 products</div>
+        <div class="sort-and-filters">
+          <label for="sortSelect" style="font-size: 0.85rem; color: var(--text-secondary);">Sort by:</label>
+          <select id="sortSelect" class="select-control">
+            <option value="featured">Featured & Trending</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="rating">Highest Rated</option>
+            <option value="name">Product Name (A-Z)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div id="productsGrid" class="products-grid">
+      <!-- Injected via JavaScript -->
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="brand-logo" style="margin-bottom: 0.5rem;">
+          <div class="brand-icon">⚡</div>
+          <span>NexaStore</span>
+        </div>
+        <p>
+          Premium online destination for cutting-edge electronics, audio devices, smart wearables, and modern lifestyle essentials.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Shop Categories</h4>
+        <ul class="footer-links">
+          <li><a href="#catalog" onclick="document.querySelector('[data-category=electronics]').click()">Electronics</a></li>
+          <li><a href="#catalog" onclick="document.querySelector('[data-category=audio]').click()">Studio Audio</a></li>
+          <li><a href="#catalog" onclick="document.querySelector('[data-category=wearables]').click()">Smart Watches</a></li>
+          <li><a href="#catalog" onclick="document.querySelector('[data-category=cameras]').click()">Cameras & Gear</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Customer Care</h4>
+        <ul class="footer-links">
+          <li><a href="#" onclick="showToast('Track order is simulated in order history', 'info'); return false;">Order Tracking</a></li>
+          <li><a href="#" onclick="showToast('Free 30-day return policy applies to all items', 'info'); return false;">Returns Policy</a></li>
+          <li><a href="#" onclick="showToast('Free shipping on all orders over $50', 'info'); return false;">Shipping Guide</a></li>
+          <li><a href="#" onclick="showToast('Support: dadhichaman548@gmail.com', 'info'); return false;">Help Center</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Demo & Source</h4>
+        <ul class="footer-links">
+          <li><a href="https://github.com/Amandadhich01/E-commerce-app" target="_blank">GitHub Repository</a></li>
+          <li><a href="backend/src/server.js" target="_blank">Express API Code</a></li>
+          <li><a href="README.md" target="_blank">Documentation</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 2026 NexaStore by Aman Dadhich. Released under MIT License.</div>
+      <div>Hosted Live with GitHub Pages ⚡</div>
+    </div>
+  </footer>
+
+  <!-- Drawer Backdrop -->
+  <div id="drawerBackdrop" class="drawer-backdrop"></div>
+
+  <!-- Shopping Cart Drawer -->
+  <aside id="cartDrawer" class="drawer">
+    <div class="drawer-header">
+      <div class="drawer-title">
+        <span>🛒</span>
+        <span>Your Shopping Cart</span>
+      </div>
+      <button class="drawer-close" title="Close Cart">✕</button>
+    </div>
+
+    <div id="cartItemsList" class="drawer-content">
+      <!-- Items dynamically populated -->
+    </div>
+
+    <div id="cartDrawerFooter" class="drawer-footer" style="display: none;">
+      <!-- Promo Code Form -->
+      <form id="couponForm" class="coupon-section">
+        <input 
+          type="text" 
+          id="couponInput" 
+          class="coupon-input" 
+          placeholder="Promo code (e.g. WELCOME10)" 
+        />
+        <button type="submit" class="coupon-apply-btn">Apply</button>
+      </form>
+
+      <!-- Price Breakdown -->
+      <div class="price-summary-row">
+        <span>Subtotal:</span>
+        <span id="cartSubtotal">$0.00</span>
+      </div>
+      <div id="cartDiscountRow" class="price-summary-row" style="display: none; color: var(--success);">
+        <span>Discount:</span>
+        <span id="cartDiscount">-$0.00</span>
+      </div>
+      <div class="price-summary-row">
+        <span>Estimated Shipping:</span>
+        <span id="cartShipping">$0.00</span>
+      </div>
+      <div class="price-summary-row">
+        <span>Estimated Tax (8%):</span>
+        <span id="cartTax">$0.00</span>
+      </div>
+      <div class="price-summary-total">
+        <span>Estimated Total:</span>
+        <span id="cartGrandTotal" style="color: var(--primary);">$0.00</span>
+      </div>
+
+      <button class="btn-primary" style="width: 100%; justify-content: center; font-size: 1rem;" onclick="openCheckoutModal()">
+        Proceed to Checkout →
+      </button>
+    </div>
+  </aside>
+
+  <!-- Wishlist Drawer -->
+  <aside id="wishlistDrawer" class="drawer">
+    <div class="drawer-header">
+      <div class="drawer-title">
+        <span>♥</span>
+        <span>Your Wishlist</span>
+      </div>
+      <button class="drawer-close" title="Close Wishlist">✕</button>
+    </div>
+
+    <div id="wishlistItemsList" class="drawer-content">
+      <!-- Injected via JavaScript -->
+    </div>
+  </aside>
+
+  <!-- Quick View Modal -->
+  <div id="quickViewModal" class="modal-overlay">
+    <div class="modal-box" style="max-width: 780px;">
+      <button class="modal-close-corner">✕</button>
+      <div id="quickViewContent">
+        <!-- Content injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkout Modal -->
+  <div id="checkoutModal" class="modal-overlay">
+    <div class="modal-box">
+      <button class="modal-close-corner">✕</button>
+      <div style="padding: 2rem;">
+        <h2 class="form-title">Secure Checkout</h2>
+        <p class="form-subtitle">Complete your shipping and payment information</p>
+
+        <form id="checkoutForm">
+          <div class="form-group">
+            <label class="form-label" for="checkoutName">Full Name</label>
+            <input type="text" id="checkoutName" class="form-input" required placeholder="Aman Dadhich" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="checkoutEmail">Email Address</label>
+            <input type="email" id="checkoutEmail" class="form-input" required placeholder="dadhichaman548@gmail.com" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="checkoutAddress">Delivery Address</label>
+            <input type="text" id="checkoutAddress" class="form-input" required placeholder="123 Innovation Boulevard, Suite 400" />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="checkoutCity">City</label>
+              <input type="text" id="checkoutCity" class="form-input" required placeholder="New Delhi" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="checkoutZip">Postal Code</label>
+              <input type="text" id="checkoutZip" class="form-input" required placeholder="110001" />
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 1rem;">
+            <label class="form-label">Payment Method</label>
+            <div style="display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.4rem;">
+              <label style="display: flex; align-items: center; gap: 0.6rem; cursor: pointer; background: var(--bg-card); padding: 0.65rem 0.95rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                <input type="radio" name="paymentMethod" value="card" checked />
+                <span>💳 Credit / Debit Card (Instant Simulation)</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 0.6rem; cursor: pointer; background: var(--bg-card); padding: 0.65rem 0.95rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                <input type="radio" name="paymentMethod" value="upi" />
+                <span>⚡ UPI / Instant QR Payment</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 0.6rem; cursor: pointer; background: var(--bg-card); padding: 0.65rem 0.95rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                <input type="radio" name="paymentMethod" value="cod" />
+                <span>📦 Cash on Delivery (COD)</span>
+              </label>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-top: 1px dashed var(--border-color); margin-top: 1.25rem;">
+            <span style="font-size: 1.05rem; font-weight: 700;">Total to Pay:</span>
+            <span id="checkoutTotalDisplay" style="font-size: 1.4rem; font-weight: 800; color: var(--success);">$0.00</span>
+          </div>
+
+          <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; font-size: 1rem;">
+            Place Order Now 🔒
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order Success Modal -->
+  <div id="orderSuccessModal" class="modal-overlay">
+    <div class="modal-box" style="max-width: 520px;">
+      <button class="modal-close-corner">✕</button>
+      <div id="orderSuccessContent">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Auth Modal (Sign In / Sign Up) -->
+  <div id="authModal" class="modal-overlay">
+    <div class="modal-box" style="max-width: 440px;">
+      <button class="modal-close-corner">✕</button>
+      <div style="padding: 2rem;">
+        <div class="auth-tabs">
+          <button id="tab-login" class="auth-tab active" onclick="switchAuthTab('login')">Sign In</button>
+          <button id="tab-register" class="auth-tab" onclick="switchAuthTab('register')">Create Account</button>
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm">
+          <div class="form-group">
+            <label class="form-label" for="loginEmail">Email Address</label>
+            <input type="email" id="loginEmail" class="form-input" required placeholder="aman@example.com" value="aman@example.com" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" class="form-input" required placeholder="••••••••" value="password123" />
+          </div>
+          <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 1rem;">
+            Sign In
+          </button>
+          <p style="text-align: center; margin-top: 1rem; font-size: 0.8rem; color: var(--text-muted);">
+            Demo account prefilled for instant testing!
+          </p>
+        </form>
+
+        <!-- Register Form -->
+        <form id="registerForm" style="display: none;">
+          <div class="form-group">
+            <label class="form-label" for="registerName">Full Name</label>
+            <input type="text" id="registerName" class="form-input" required placeholder="Aman Dadhich" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="registerEmail">Email Address</label>
+            <input type="email" id="registerEmail" class="form-input" required placeholder="you@domain.com" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="registerPassword">Password</label>
+            <input type="password" id="registerPassword" class="form-input" required placeholder="Minimum 6 characters" />
+          </div>
+          <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 1rem;">
+            Create Account
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- User Profile Modal -->
+  <div id="profileModal" class="modal-overlay">
+    <div class="modal-box" style="max-width: 480px;">
+      <button class="modal-close-corner">✕</button>
+      <div id="profileModalContent">
+        <!-- Content injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Toast Notifications -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

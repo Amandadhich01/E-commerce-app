@@ -1,0 +1,4 @@
+# GitHub Linguist Language Override
+*.bat linguist-vendored=true
+*.bat linguist-documentation=true
+*.md linguist-documentation=true
